@@ -1,0 +1,11 @@
+#column-left {
+	float:left;
+	width:50%;
+	font-size: .85em;
+}
+
+#column-right {
+	float:right;
+	width:50%;
+	font-size: .85em;
+}
