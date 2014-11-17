@@ -107,6 +107,10 @@
 					</section>
 				</section>
 				<section>
+					<h2>What to test?</h2>
+					<p>Test the logic behind the components</p>
+				</section>	
+				<section>
 					<h2>Let's start<h2>
 					<img src="http://cache.desktopnexus.com/thumbnails/82119-bigthumbnail.jpg">
 				</section>	
@@ -161,22 +165,25 @@
 
 </pre>
 				</section>
+				<section>
+					The following tests we are made with Jasmine <br>
+					<a href="http://jasmine.github.io/">jasmine.github.io</a>
+
+				</section>	
 
 				<section>
-					<h2>How to stub promises</h2>
+					<h2>How to mock promises</h2>
 
 					<pre style="background:#fff;color:#000">
   
   beforeEach(inject(<span style="color:#ff7800">function</span> ($controller, $rootScope, $q) {
-
-    <span style="color:#8c868f">//create a defer that we will resolve/reject in specs</span>
-    defer <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>q.<span style="color:#3b5bb5">defer</span>();
 
     scope <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>rootScope.<span style="color:#ff7800">$</span><span style="color:#ff7800">new</span>();
 
     <span style="color:#8c868f">//create mock of the service</span>
     MockDataService <span style="color:#ff7800">=</span> {
       <span style="color:#3b5bb5">getData</span>: <span style="color:#ff7800">function</span>(){
+      	defer <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>q.<span style="color:#3b5bb5">defer</span>();
         <span style="color:#ff7800">return</span> defer.promise
       }
     };
@@ -206,8 +213,6 @@
 
     <span style="color:#8c868f">//resolve the promise</span>
     defer.resolve({data:[<span style="color:#409b1c">'AngularJS'</span>, <span style="color:#409b1c">'Emberjs'</span>, <span style="color:#409b1c">'Backbone'</span>]});
-
-    expect(scope.items).toBeUndefined();
 
     <span style="color:#8c868f">//kick the angular digest loop to propagate promise resolution</span>
     scope.<span style="color:#ff7800">$</span><span style="color:#3b5bb5">apply</span>();
@@ -242,7 +247,6 @@
 				<section>
 					
 						<h3>Ajax calls</h3>
-					<span>AngularJs <span style ="color:#ff7800">ngMock</span> module comes with mocks for <span style ="color:#ff7800">$http</span> service to avoid asynchrony </span> 
 					
 				</section>
 
@@ -377,7 +381,7 @@
 
   }));
 
-  beforeEach(inject(<span style="color:#ff7800">function</span> ($controller, $rootScope, <span style="color:#ff7800">DataService</span>, _$q_) 
+  beforeEach(inject(<span style="color:#ff7800">function</span> ($controller, $rootScope, _$q_) 
   {
 
     scope <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>rootScope.<span style="color:#ff7800">$</span><span style="color:#ff7800">new</span>();
