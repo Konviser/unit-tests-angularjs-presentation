@@ -245,6 +245,54 @@
 					</p>
 				</section>
 
+<section>
+	<h3>Mocking dependencies</h3>
+	<br>
+	<p>
+		It's possible to override Angularjs components by creating the new ones with the same name
+	</p>
+</section>
+
+<section>
+	Angularjs <span style="color:#3b5bb5">$provide </span> service registers components of the app
+	We can make a use of it to override components we want to mock
+</section>
+
+<section>
+
+	<pre style="background:#fff;color:#000">
+
+ beforeEach(module(<span style="color:#409b1c">'jsmeetupApp'</span>, <span style="color:#ff7800">function</span>(<span style="color:#ff7800">$</span>provide){
+
+  <span style="color:#8c868f">//this will override the original service</span>
+  <span style="color:#ff7800">$</span>provide.service(<span style="color:#409b1c">'DataService'</span>,<span style="color:#ff7800">function</span>() {
+
+      <span style="color:#3b5bb5">this</span>.<span style="color:#3b5bb5">getData</span> <span style="color:#ff7800">=</span> <span style="color:#ff7800">function</span>(){
+        defer <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>q.<span style="color:#3b5bb5">defer</span>();
+        <span style="color:#ff7800">return</span> defer.promise
+      };
+
+    })
+
+  }));
+
+  beforeEach(inject(<span style="color:#ff7800">function</span> ($controller, $rootScope, _$q_) 
+  {
+
+    scope <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>rootScope.<span style="color:#ff7800">$</span><span style="color:#ff7800">new</span>();
+    <span style="color:#ff7800">$</span>q <span style="color:#ff7800">=</span> _<span style="color:#ff7800">$</span>q_;
+
+    MainCtrl <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>controller(<span style="color:#409b1c">'MainCtrl'</span>, {<span style="color:#ff7800">$</span>scope: scope});
+
+  }));
+
+</pre>
+</section>	
+<section>
+	Use <span style="color:#3b5bb5">$provide </span> to mock the dependecies for your app service.
+	With controllers you can do both ways. 
+</section>	
+
 				<section>
 					
 						<h3>Ajax calls</h3>
@@ -281,6 +329,7 @@
 						<img width="320" height="299" src="http://www.quickmeme.com/img/18/183338d02bcf313048df15267b71ca287ea024a711468508e7ba484454dba0a0.jpg" alt="Meny">
 					</a>
 				</section>
+
 
 <section>
 					<h2>Ajax request</h2>
@@ -349,52 +398,7 @@
 	</small>
 
 </section>	
-				
-
-<section>
-	<h3>Mocking dependencies</h3>
-	<br>
-	<p>
-		It's possible to override Angularjs components by creating the new ones with the same name
-	</p>
-</section>
-
-<section>
-	Angularjs <span style="color:#3b5bb5">$provide </span> service registers components of the app
-	We can make a use of it to override components we want to mock
-</section>
-
-<section>
-
-	<pre style="background:#fff;color:#000">
-
- beforeEach(module(<span style="color:#409b1c">'jsmeetupApp'</span>, <span style="color:#ff7800">function</span>(<span style="color:#ff7800">$</span>provide){
-
-  <span style="color:#8c868f">//this will override the original service</span>
-  <span style="color:#ff7800">$</span>provide.service(<span style="color:#409b1c">'DataService'</span>,<span style="color:#ff7800">function</span>() {
-
-      <span style="color:#3b5bb5">this</span>.<span style="color:#3b5bb5">getData</span> <span style="color:#ff7800">=</span> <span style="color:#ff7800">function</span>(){
-        defer <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>q.<span style="color:#3b5bb5">defer</span>();
-        <span style="color:#ff7800">return</span> defer.promise
-      };
-
-    })
-
-  }));
-
-  beforeEach(inject(<span style="color:#ff7800">function</span> ($controller, $rootScope, _$q_) 
-  {
-
-    scope <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>rootScope.<span style="color:#ff7800">$</span><span style="color:#ff7800">new</span>();
-    <span style="color:#ff7800">$</span>q <span style="color:#ff7800">=</span> _<span style="color:#ff7800">$</span>q_;
-
-    MainCtrl <span style="color:#ff7800">=</span> <span style="color:#ff7800">$</span>controller(<span style="color:#409b1c">'MainCtrl'</span>, {<span style="color:#ff7800">$</span>scope: scope});
-
-  }));
-
-</pre>
-</section>		
-
+					
 			<section >
 					<h2>We are almost there</h2>
 
